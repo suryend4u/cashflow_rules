@@ -10,16 +10,14 @@ import org.kie.internal.builder.DecisionTableConfiguration;
 import org.kie.internal.builder.DecisionTableInputType;
 import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class DroolsBeanFactory {
 
-    private static final String RULES_PATH = "com/drools/example/rules/";
     private KieServices kieServices = KieServices.Factory.get();
 
-    private KieFileSystem getKieFileSystem() throws IOException {
+    private KieFileSystem getKieFileSystem() {
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
         List<String> rules = Arrays.asList("Balance_Nudges.xls");
         for (String rule : rules) {
@@ -28,14 +26,14 @@ public class DroolsBeanFactory {
         return kieFileSystem;
     }
 
-    public KieContainer getKieContainer() throws IOException {
+/*    public KieContainer getKieContainer() {
         getKieRepository();
         KieBuilder kb = kieServices.newKieBuilder(getKieFileSystem());
         kb.buildAll();
         KieModule kieModule = kb.getKieModule();
         KieContainer kContainer = kieServices.newKieContainer(kieModule.getReleaseId());
         return kContainer;
-    }
+    }*/
 
     private void getKieRepository() {
         final KieRepository kieRepository = kieServices.getRepository();
@@ -46,7 +44,7 @@ public class DroolsBeanFactory {
         });
     }
 
-    public KieSession getKieSession() {
+   /* public KieSession getKieSession() {
         getKieRepository();
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
         kieFileSystem.write(ResourceFactory.newClassPathResource("com/drools/example/rules/Balance_Nudges.xls"));
@@ -55,7 +53,7 @@ public class DroolsBeanFactory {
         KieModule kieModule = kb.getKieModule();
         KieContainer kContainer = kieServices.newKieContainer(kieModule.getReleaseId());
         return kContainer.newKieSession();
-    }
+    }*/
 
     public KieSession getKieSession(Resource dt) {
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem()
