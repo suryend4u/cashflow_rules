@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
         App app = new App();
         app.setup();
-        app.sme_custsomer_low_balance();
+        app.smeCustomerLowBalance();
     }
 
     private KieSession kSession;
@@ -27,7 +27,7 @@ public class App {
         kSession = factory.getKieSession(resource);
     }
 
-    public void sme_custsomer_low_balance() {
+    public void smeCustomerLowBalance() {
         Customer customer = new Customer(CustomerType.SME,
                 3000);
         kSession.insert(customer);

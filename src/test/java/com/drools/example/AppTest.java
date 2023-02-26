@@ -2,6 +2,7 @@ package com.drools.example;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.kie.api.io.Resource;
@@ -22,13 +23,13 @@ public class AppTest {
     public void setup() {
         Resource resource =
                 ResourceFactory.newClassPathResource("Balance_Nudges.xls",
-                getClass());
+                        getClass());
         resource.setResourceType(ResourceType.DTABLE);
         kSession = new DroolsBeanFactory().getKieSession(resource);
     }
 
     @Test
-    public void sme_custsomer_low_balance() throws Exception {
+    public void smeCustomerLowBalance() {
         Customer customer = new Customer(CustomerType.SME, 8000);
         kSession.insert(customer);
         kSession.fireAllRules();
@@ -38,7 +39,7 @@ public class AppTest {
     }
 
     @Test
-    public void bb_custsomer_low_balance() throws Exception {
+    public void bbCustomerLowBalance() {
         Customer customer = new Customer(CustomerType.BB, 3000);
         kSession.insert(customer);
         kSession.fireAllRules();
@@ -49,7 +50,7 @@ public class AppTest {
     }
 
     @Test
-    public void sme_custsomer_high_balance() throws Exception {
+    public void smeCustomerHighBalance() {
         Customer customer = new Customer(CustomerType.SME, 250000);
         kSession.insert(customer);
         kSession.fireAllRules();
@@ -60,7 +61,7 @@ public class AppTest {
     }
 
     @Test
-    public void bb_custsomer_high_balance() throws Exception {
+    public void bbCustomerHighBalance() {
         Customer customer = new Customer(CustomerType.BB, 55000);
         kSession.insert(customer);
         kSession.fireAllRules();
@@ -71,7 +72,7 @@ public class AppTest {
     }
 
     @Test
-    public void sme_custsomer_normal_balance() throws Exception {
+    public void smeCustomerNormalBalance() {
         Customer customer = new Customer(CustomerType.SME, 100000);
         kSession.insert(customer);
         kSession.fireAllRules();
@@ -82,7 +83,7 @@ public class AppTest {
     }
 
     @Test
-    public void bb_custsomer_normal_balance() throws Exception {
+    public void bbCustomerNormalBalance() {
         Customer customer = new Customer(CustomerType.BB, 35000);
         kSession.insert(customer);
         kSession.fireAllRules();
