@@ -11,9 +11,8 @@ import org.kie.api.runtime.KieSession;
 
 public class DroolsBeanFactory {
 
-    private KieServices kieServices = KieServices.Factory.get();
-
     public KieSession getKieSession(Resource dt) {
+        KieServices kieServices = KieServices.Factory.get();
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem()
                 .write(dt);
         kieServices.newKieBuilder(kieFileSystem)
