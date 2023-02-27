@@ -12,7 +12,6 @@ import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
 
 public class App {
-    private static final String FILEPATH = "com/drools/example/rules/Balance_Nudges.xls";
     private KieSession kSession;
 
     public static void main(String[] args) {
@@ -22,15 +21,15 @@ public class App {
     }
 
     public void setup() {
-        Resource resource = ResourceFactory.newClassPathResource(FILEPATH, getClass());
+        Resource resource = ResourceFactory.newClassPathResource("Balance_Nudges.xls",
+                getClass());
         resource.setResourceType(ResourceType.DTABLE);
         DroolsBeanFactory factory = new DroolsBeanFactory();
         kSession = factory.getKieSession(resource);
     }
 
     public void smeCustomerLowBalance() {
-        Customer customer = new Customer(CustomerType.SME,
-                3000);
+        Customer customer = new Customer(CustomerType.SME, 3000);
         kSession.insert(customer);
         kSession.fireAllRules();
         System.out.println(!Objects.equals("Nudge text " + null, customer.getNudge()) ? customer.getNudge() : "No Nudge generated");
