@@ -1,7 +1,6 @@
 package com.drools.example;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +29,14 @@ public class AppTest {
 
     @Test
     public void smeCustomerLowBalance() {
-        Customer customer = new Customer(CustomerType.SME, 8000);
+        Customer customer = new Customer(CustomerType.SME, 3000);
         kSession.insert(customer);
         kSession.fireAllRules();
-        if (customer.getNudge() != null)
-            System.out.println("Nudge text : " + customer.getNudge());
-        assertNotNull(customer.getNudge());
+        if (customer.getNudges() != null) {
+            System.out.println("Nudge texts for smeCustomerLowBalance: ");
+            customer.getNudges().forEach(System.out::println);
+        }
+        assertEquals(2,customer.getNudges().size());
     }
 
     @Test
@@ -43,10 +44,11 @@ public class AppTest {
         Customer customer = new Customer(CustomerType.BB, 3000);
         kSession.insert(customer);
         kSession.fireAllRules();
-        if (customer.getNudge() != null)
-            System.out.println("Nudge text : " +
-                    customer.getNudge());
-        assertNotNull(customer.getNudge());
+        if (customer.getNudges() != null) {
+            System.out.println("Nudge texts for bbCustomerLowBalance: ");
+            customer.getNudges().forEach(System.out::println);
+        }
+        assertEquals(1,customer.getNudges().size());
     }
 
     @Test
@@ -54,10 +56,11 @@ public class AppTest {
         Customer customer = new Customer(CustomerType.SME, 250000);
         kSession.insert(customer);
         kSession.fireAllRules();
-        if (customer.getNudge() != null)
-            System.out.println("Nudge text : " +
-                    customer.getNudge());
-        assertNotNull(customer.getNudge());
+        if (customer.getNudges() != null) {
+            System.out.println("Nudge texts for smeCustomerHighBalance: ");
+            customer.getNudges().forEach(System.out::println);
+        }
+        assertEquals(1,customer.getNudges().size());
     }
 
     @Test
@@ -65,10 +68,11 @@ public class AppTest {
         Customer customer = new Customer(CustomerType.BB, 55000);
         kSession.insert(customer);
         kSession.fireAllRules();
-        if (customer.getNudge() != null)
-            System.out.println("Nudge text : " +
-                    customer.getNudge());
-        assertNotNull(customer.getNudge());
+        if (customer.getNudges() != null) {
+            System.out.println("Nudge texts for bbCustomerHighBalance: ");
+            customer.getNudges().forEach(System.out::println);
+        }
+        assertEquals(1,customer.getNudges().size());
     }
 
     @Test
@@ -76,10 +80,7 @@ public class AppTest {
         Customer customer = new Customer(CustomerType.SME, 100000);
         kSession.insert(customer);
         kSession.fireAllRules();
-        if (customer.getNudge() != null)
-            System.out.println("Nudge text : " +
-                    customer.getNudge());
-        assertNull(customer.getNudge());
+        assertEquals(0,customer.getNudges().size());
     }
 
     @Test
@@ -87,10 +88,7 @@ public class AppTest {
         Customer customer = new Customer(CustomerType.BB, 35000);
         kSession.insert(customer);
         kSession.fireAllRules();
-        if (customer.getNudge() != null)
-            System.out.println("Nudge text : " +
-                    customer.getNudge());
-        assertNull(customer.getNudge());
+        assertEquals(0,customer.getNudges().size());
     }
 
 }

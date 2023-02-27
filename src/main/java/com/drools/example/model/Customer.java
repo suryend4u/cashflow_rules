@@ -1,15 +1,19 @@
 package com.drools.example.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer {
 
     private CustomerType type;
     private float balance;
-    private String nudge;
+    private List<String> nudges;
 
     public Customer(CustomerType type, float balance) {
         super();
         this.type = type;
         this.balance = balance;
+        this.nudges = new ArrayList<>();
     }
 
     public CustomerType getType() {
@@ -28,12 +32,12 @@ public class Customer {
         this.balance = balance;
     }
 
-    public String getNudge() {
-        return nudge;
+    public List<String> getNudges() {
+        return this.nudges;
     }
 
     public void setNudge(String nudge) {
-        this.nudge = new String(nudge);
+        this.nudges.add(nudge);
     }
 
     public enum CustomerType {
